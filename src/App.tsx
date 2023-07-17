@@ -23,6 +23,7 @@ function App () {
   }
 
   const handleReset = () => {
+    setSortByCountry(false)
     setUsers(originalUsers.current)
   }
 
@@ -46,10 +47,17 @@ function App () {
     <>
       <header>
         <h1>User&apos;s List</h1>
-        <div className="menu-container">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '20px',
+            marginBottom: '40px'
+          }}
+        >
           <button onClick={toggleColors}>Color rows</button>
           <button onClick={toggleSortByCountry}>Order by country</button>
-          <button onClick={handleReset}>Reset</button>
+          <button onClick={handleReset}>Reset list</button>
           <input placeholder="Filter by country" type="text" />
         </div>
       </header>
