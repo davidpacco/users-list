@@ -7,6 +7,7 @@ function App () {
   const [users, setUsers] = useState<User[]>([])
   const [showRowColors, setShowRowColors] = useState(false)
   const [sortByCountry, setSortByCountry] = useState(false)
+  const [filterCountry, setFilterCountry] = useState('')
   const originalUsers = useRef<User[]>([])
 
   const toggleColors = () => {
@@ -39,9 +40,15 @@ function App () {
       })
   }, [])
 
-  const sortedUSers = sortByCountry
-    ? users.toSorted((a, b) => a.location.country.localeCompare(b.location.country))
+  const filteredUsers = filterCountry.length !== 0
+    ? users.filter(user => {
+      return user.location.country.toLowerCase().includes(filterCountry.toLowerCase())
+    })
     : users
+
+  const sortedUSers = sortByCountry
+    ? filteredUsers.toSorted((a, b) => a.location.country.localeCompare(b.location.country))
+    : filteredUsers
 
   return (
     <>
@@ -58,7 +65,12 @@ function App () {
           <button onClick={toggleColors}>Color rows</button>
           <button onClick={toggleSortByCountry}>Order by country</button>
           <button onClick={handleReset}>Reset list</button>
-          <input placeholder="Filter by country" type="text" />
+          <input
+            placeholder="Filter by country"
+            type="text"
+            onChange={(e) => {
+              setFilterCountry(e.target.value)
+            }} />
         </div>
       </header>
       <main>
