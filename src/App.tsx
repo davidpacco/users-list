@@ -54,14 +54,7 @@ function App () {
     <>
       <header>
         <h1>User&apos;s List</h1>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '20px',
-            marginBottom: '40px'
-          }}
-        >
+        <div className="menu-container">
           <button onClick={toggleColors}>Color rows</button>
           <button onClick={toggleSortByCountry}>Order by country</button>
           <button onClick={handleReset}>Reset list</button>
